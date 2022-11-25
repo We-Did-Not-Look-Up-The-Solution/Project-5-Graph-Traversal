@@ -25,10 +25,18 @@ class Vertex<T> implements VertexInterface<T> {
       cost = 0;
    } // end constructor
 
+   /**
+    * Test wheter this vertex has a neighbor
+    * @return true if has at least one neighbor, else false
+    */
    public boolean hasNeighbor() {
 	   return !edgeList.isEmpty();
    }
    
+   /**
+    * Gets the next unvisited neighbor
+    * @return The next unvisited neighbor
+    */
    public VertexInterface<T> getUnvisitedNeighbor() {
       VertexInterface<T> result = null;
       Iterator<VertexInterface<T>> neighbors = getNeighborIterator();
@@ -41,6 +49,10 @@ class Vertex<T> implements VertexInterface<T> {
       return result;
    }
    
+   /**
+    * Redefine the equals() to correctly compare two verticies
+    * @return true if the verticies equal each other, else false
+    */
    public boolean equals(Object other) {
       boolean result;
       if ((other == null) || (getClass() != other.getClass()))
@@ -54,47 +66,82 @@ class Vertex<T> implements VertexInterface<T> {
       return result;
    }
    
-   @Override
+   /**
+    * Returns the label of this Vertex
+    * @return The label representing this Vertex
+    */
    public T getLabel() {
 	   return label;
    }
 
-   @Override
+   /**
+    * Mark this vertex as visited
+    */
    public void visit() {
 	   visited = true;
    }
 
-   @Override
+   /**
+    * Mark this vertex as not visited
+    */
    public void unvisit() {
 	   visited = false;
    }
 
-   @Override
+   /**
+    * Checks wheter this vertex was visited
+    * @return true if this vertex was visited, else false
+    */
    public boolean isVisited() {
 	   return visited;
    }
 
-   @Override
+   /**
+    * Sets the predecessor of this vertex
+    * @param the new predecessor
+    */
    public void setPredecessor(VertexInterface<T> predecessor) {
 	   previousVertex = predecessor;
    }
 
+   /**
+    * Gets the predecessor of this vertex
+    * @return the predecessor of this vertex
+    */
    public VertexInterface<T> getPredecessor() {
    	return previousVertex;
    }
 
+   /**
+    * Checks whether this vertex has a predecessor
+    * @return true if it does have a predecessor, else false
+    */
    public boolean hasPredecessor() {
 	   return false;
    }
 
+   /**
+    * Set the cost of this vertex
+    * @param newCost The new cost of this Vertex
+    */
    public void setCost(double newCost) {
 	   cost = newCost;
    }
 
+   /**
+    * Get the cost of this vertex
+    * @return the Cost of this vertex
+    */
    public double getCost() {
 	   return cost;
    }
    
+   /**
+    * Connect to Vertices together and set the weight of their edge
+    * @param endVertex the vertex that the this vertex will connect to
+    * @param edgeWeight The weight of this edge
+    * @return true if the operation was successful
+    */
    public boolean connect(VertexInterface<T> endVertex, double edgeWeight) {
       boolean result = false;
            if (!this.equals(endVertex)) {  // Vertices are distinct
@@ -113,18 +160,34 @@ class Vertex<T> implements VertexInterface<T> {
    	return result;
    }  // end connect
    
+   /**
+    * Connect to Vertices together
+    * @param endVertex the vertex that the this vertex will connect to
+    * @return true if the operation was successful
+    */
    public boolean connect(VertexInterface<T> endVertex) {
       return connect(endVertex, 0);
    }
    
+   /**
+    * Get the iterator that will go through this verticies neighbors
+    * @return the iterator
+    */
    public Iterator<VertexInterface<T>> getNeighborIterator() {
 	   return new NeighborIterator();
    }
    
+   /**
+    * Get the iterator that will go through this verticies using weight
+    * @return the iterator
+    */
    public Iterator<Double> getWeightIterator() {
 	   return null;
    }
    
+   /**
+    *	A class that defines how to iterate through the neighbors of this vertex
+    */
    private class NeighborIterator implements Iterator<VertexInterface<T>> {
       private Iterator<Edge> edges;
       
@@ -154,6 +217,9 @@ class Vertex<T> implements VertexInterface<T> {
       } // end remove
    }
 
+   /**
+    *	The class that represents the connection between this vertex and another
+    */
    protected class Edge {
       private VertexInterface<T> vertex; // Vertex at end of edge
       private double weight;

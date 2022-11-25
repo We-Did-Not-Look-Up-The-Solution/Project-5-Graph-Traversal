@@ -110,7 +110,8 @@ public class LinkedDictionary<K extends Comparable<? super K>, V> implements Dic
 
 	@Override
 	public void clear() {
-		
+		for(int i = 0; i < numberOfEntries; i++)
+			remove(firstNode.key);
 	}
    
 	public Iterator<K> getKeyIterator() {

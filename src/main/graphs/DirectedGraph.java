@@ -102,7 +102,6 @@ public class DirectedGraph<T extends Comparable<T>> implements GraphInterface<T>
 	}
 
 	public boolean hasEdge(T begin, T end) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -172,7 +171,6 @@ public class DirectedGraph<T extends Comparable<T>> implements GraphInterface<T>
 	}
 
 	public double getCheapestPath(T begin, T end, StackInterface<T> path) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
