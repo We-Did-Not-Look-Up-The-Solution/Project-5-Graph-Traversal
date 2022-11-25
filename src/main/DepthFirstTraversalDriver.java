@@ -5,14 +5,16 @@ import java.util.Iterator;
 import main.graphs.DirectedGraph;
 import main.stack_and_queues.QueueInterface;
 import main.trees.BinaryTree;
-import main.trees.BinaryTreeInit;
+import main.trees.BinaryForest;
 
 public class DepthFirstTraversalDriver {
 
 	public static void main(String[] args) {
 		DirectedGraph<Character> directedCharGraph = new DirectedGraph<>();
-		BinaryTreeInit treeMaker = new BinaryTreeInit();
-		BinaryTree<Character> charTree = treeMaker.getTree();
+		BinaryForest treeMaker = new BinaryForest();
+		BinaryTree<Character> preorderTree = treeMaker.getDFTTree();
+		BinaryTree<Character> levelorderTree = treeMaker.getBFTTree();
+		
 		
 		/*
 		 * Note: Depth-First Traversal for trees is traversal of the left tree and then the right tree (Preorder) 
@@ -44,15 +46,39 @@ public class DepthFirstTraversalDriver {
 		directedCharGraph.addEdge('c', 'b');
 		directedCharGraph.addEdge('i', 'f');
 		
-		// Breadth First Traversal
-		QueueInterface<Character> depthFirstTraversal = directedCharGraph.getDepthFirstTraversal('a');
-		Iterator<Character> charIterator = charTree.getPreorderIterator();
+		QueueInterface<Character> breadthFirstTraversal = directedCharGraph.getBreadthFirstTraversal('a');
+		Iterator<Character> charLevelOrderIterator = levelorderTree.getLevelOrderIterator();
 		
-		System.out.print("Iterating through a Tree with Depth-First Traversal: ");
-		while (charIterator.hasNext()) {
-			System.out.print(charIterator.next() + " ");
+		QueueInterface<Character> depthFirstTraversal = directedCharGraph.getDepthFirstTraversal('a');
+		Iterator<Character> charPreorderIterator = preorderTree.getPreorderIterator();
+		
+		// Breadth First Traversal
+		System.out.print("Iterating through a Tree with Breadth-First Traversal: ");
+		while (charLevelOrderIterator.hasNext()) {
+			System.out.print(charLevelOrderIterator.next() + " ");
 		}
 		
+		System.out.println();
+		
+		System.out.print("Iterating through a Directed Graph with Breadth-First Traversal: ");
+		for (int i = 0; i < directedCharGraph.getNumberOfEdges(); i++) {
+			if (!breadthFirstTraversal.isEmpty()) {
+				Character next = breadthFirstTraversal.dequeue();
+				System.out.print(next + " ");
+			}
+		}
+		
+		System.out.println("\n");
+		
+		// Depth First Traversal
+		System.out.print("Iterating through a Tree with Depth-First Traversal: ");
+		while (charPreorderIterator.hasNext()) {
+			System.out.print(charPreorderIterator.next() + " ");
+		}
+		
+		System.out.println();
+		
+		System.out.print("Iterating through a Directed Graph with Depth-First Traversal: ");
 		for (int i = 0; i < directedCharGraph.getNumberOfEdges(); i++) {
 			if (!depthFirstTraversal.isEmpty()) {
 				Character next = depthFirstTraversal.dequeue();
