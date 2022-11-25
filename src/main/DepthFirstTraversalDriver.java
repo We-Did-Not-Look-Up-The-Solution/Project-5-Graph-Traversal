@@ -1,12 +1,22 @@
 package main;
 
+import java.util.Iterator;
+
 import main.graphs.DirectedGraph;
 import main.stack_and_queues.QueueInterface;
+import main.trees.BinaryTree;
+import main.trees.BinaryTreeInit;
 
 public class DepthFirstTraversalDriver {
 
 	public static void main(String[] args) {
 		DirectedGraph<Character> directedCharGraph = new DirectedGraph<>();
+		BinaryTreeInit treeMaker = new BinaryTreeInit();
+		BinaryTree<Character> charTree = treeMaker.getTree();
+		
+		/*
+		 * Note: Depth-First Traversal for trees is traversal of the left tree and then the right tree (Preorder) 
+		 */
 		
 		// dd the verticies
 		directedCharGraph.addVertex('a');
@@ -36,6 +46,12 @@ public class DepthFirstTraversalDriver {
 		
 		// Breadth First Traversal
 		QueueInterface<Character> depthFirstTraversal = directedCharGraph.getDepthFirstTraversal('a');
+		Iterator<Character> charIterator = charTree.getPreorderIterator();
+		
+		System.out.print("Iterating through a Tree with Depth-First Traversal: ");
+		while (charIterator.hasNext()) {
+			System.out.print(charIterator.next() + " ");
+		}
 		
 		for (int i = 0; i < directedCharGraph.getNumberOfEdges(); i++) {
 			if (!depthFirstTraversal.isEmpty()) {
@@ -43,5 +59,9 @@ public class DepthFirstTraversalDriver {
 				System.out.print(next + " ");
 			}
 		}
+		
+		
 	}
+	
+	
 }

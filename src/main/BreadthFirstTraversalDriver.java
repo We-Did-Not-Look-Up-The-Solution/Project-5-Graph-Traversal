@@ -8,6 +8,10 @@ public class BreadthFirstTraversalDriver {
 	public static void main(String[] args) {
 		DirectedGraph<Character> directedCharGraph = new DirectedGraph<>();
 		
+		/*
+		 * Note: Breadth-First traversal for trees is the same traversal as Level Order!
+		 */
+		
 		// dd the verticies
 		directedCharGraph.addVertex('a');
 		directedCharGraph.addVertex('b');
@@ -43,5 +47,7 @@ public class BreadthFirstTraversalDriver {
 				System.out.print(next + " ");
 			}
 		}
+		
+		// Answer: a b d e g f h c i
 	}
 }
