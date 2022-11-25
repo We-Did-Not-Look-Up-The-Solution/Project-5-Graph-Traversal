@@ -1,14 +1,17 @@
 package main.trees;
 
 /**
- * 
- * @author wwwyv
+ * A cleverly-named class that makes two trees that are compatible with the traversal order of the same name
+ * @author CarltheSpiny
  *
  */
 public class BinaryForest {
-	BinaryTree<Character> dftCharTree;
-	BinaryTree<Character> bftCharTree;
+	BinaryTree<Character> dftCharTree; // Depth First Traversal Compatible Tree
+	BinaryTree<Character> bftCharTree; // Breadth First Traversal Compatible Tree
 
+	/**
+	 * Default Constructor
+	 */
 	public BinaryForest() {
 		dftCharTree = null;
 		bftCharTree = null;
@@ -16,6 +19,9 @@ public class BinaryForest {
 		createBreadthFirstTree();
 	}
 
+	/**
+	 * Create the Depth First Tree using the BinaryNode class
+	 */
 	private void createDepthFirstTree() {
 		BinaryNode<Character> leftChild_4 = new BinaryNode<Character>('i'); // i (L: null, R:null)
 		BinaryNode<Character> rightChild_4 = new BinaryNode<Character>('d'); // d (L: null, R:null)
@@ -36,6 +42,9 @@ public class BinaryForest {
 		setDFTTree(charTree); // Set this tree as the one we just made
 	}
 	
+	/**
+	 * Create the Breadth First Tree using the BinaryNode class
+	 */
 	private void createBreadthFirstTree() {
 		BinaryNode<Character> leftChild_4 = new BinaryNode<Character>('c'); // c (L: null, R:null)
 		BinaryNode<Character> rightChild_4 = new BinaryNode<Character>('i'); // i (L: null, R:null)
@@ -56,19 +65,37 @@ public class BinaryForest {
 		setBFTTree(charTree); // Set this tree as the one we just made
 	}
 	
+	/**
+	 * Get the Depth First Tree
+	 * @return the tree compatible with depth-first traversal
+	 */
 	public BinaryTree<Character> getDFTTree() {
 		return dftCharTree;
 	}
 	
+	/**
+	 * Get the Breadth First Tree
+	 * @return the tree compatible with breadth-first traversal
+	 */
 	public BinaryTree<Character> getBFTTree() {
 		return bftCharTree;
 	}
 	
+	/**
+	 * Set a tree as the new Depth First Tree
+	 * @param newTree the new tree
+	 * @return Result of setting the tree
+	 */
 	private boolean setDFTTree(BinaryTree<Character> newTree) {
 		dftCharTree = newTree;
 		return true;
 	}
 	
+	/**
+	 * Set a tree as the new Breadth First Tree
+	 * @param newTree the new tree
+	 * @return Result of setting the tree
+	 */
 	private boolean setBFTTree(BinaryTree<Character> newTree) {
 		bftCharTree = newTree;
 		return true;
