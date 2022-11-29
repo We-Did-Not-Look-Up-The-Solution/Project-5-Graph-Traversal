@@ -11,23 +11,31 @@ import java.util.NoSuchElementException;
    @author Frank M. Carrano
    @author Timothy M. Henry
    @version 5.0
+ * @param <K> A comparable value to be used as a key
+ * @param <V> The data type to be used for the value
 */
 public class LinkedDictionary<K extends Comparable<? super K>, V> implements DictionaryInterface<K, V>
 {
 	private Node firstNode; // Reference to first node of chain
 	private int  numberOfEntries; 
 	
-	public LinkedDictionary()
-	{
+	/** Default Constructor */
+	public LinkedDictionary() {
       initializeDataFields();
-	} // end default constructor
+	}
 	
-   private void initializeDataFields() {
+	/** Initialize data fields to non-empty values */
+	private void initializeDataFields() {
 		firstNode = null;
 		numberOfEntries = 0;
 	}
 
-   public V add(K key, V value)	{
+	/** Add this entry using the passed key and value 
+	 * @param key the representation of this value
+	 * @param value the value of this entry
+	 * @return The entry added
+	 */
+	public V add(K key, V value)	{
 		V result = null;
 		if ((key == null) || (value == null))
 			throw new IllegalArgumentException("Cannot add null to a dictionary.");
@@ -68,6 +76,11 @@ public class LinkedDictionary<K extends Comparable<? super K>, V> implements Dic
 	} // end add
 
    
+	/**
+	 * Remove the entry using the specfied key
+	 * @param key The representation of the entry
+	 * @return the entry being removed
+	 */
 	public V remove(K key) {
 	   Node currentNode = firstNode;
 	   Node previousNode = null;
@@ -85,6 +98,12 @@ public class LinkedDictionary<K extends Comparable<? super K>, V> implements Dic
 	   return result;
 	}
 
+	/**
+	 * Gets the value of the entry with the specfied key
+	 * @param key The key of the desired entry
+	 * @return The value of the entry
+	 * 
+	 */
 	public V getValue(K key) {
 		Node currentNode = firstNode;
 		while (!currentNode.getKey().equals(key)) {

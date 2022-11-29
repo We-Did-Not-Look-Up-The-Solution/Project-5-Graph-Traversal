@@ -6,6 +6,7 @@ import java.util.EmptyStackException;
     A class of stacks whose entries are stored in a chain of nodes.
     @author Frank M. Carrano and Timothy M. Henry
     @version 5.0
+ * @param <T> The data type to use for this stack
 */
 public final class LinkedStack<T> implements StackInterface<T>
 {
@@ -71,8 +72,8 @@ public final class LinkedStack<T> implements StackInterface<T>
          return data;
       } // end getData
       
-      private void setData(T newData)
-      {
+      @SuppressWarnings("unused")
+      private void setData(T newData) {
          data = newData;
       } // end setData
       
@@ -81,8 +82,8 @@ public final class LinkedStack<T> implements StackInterface<T>
          return next;
       } // end getNextNode
       
-      private void setNextNode(Node nextNode)
-      {
+      @SuppressWarnings("unused")
+      private void setNextNode(Node nextNode) {
          next = nextNode;
       } // end setNextNode
 	} // end Node

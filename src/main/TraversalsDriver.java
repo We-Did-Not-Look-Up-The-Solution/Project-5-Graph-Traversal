@@ -7,8 +7,17 @@ import main.stack_and_queues.QueueInterface;
 import main.trees.BinaryTree;
 import main.trees.BinaryForest;
 
+/**
+ * Makes a directed graph and a tree to traverse through them as specifed in project specification
+ * @author CarltheSpiny
+ *
+ */
 public class TraversalsDriver {
 
+	/**
+	 * Main driver that outputs a traversal of a graph and tree
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		DirectedGraph<Character> directedCharGraph = new DirectedGraph<>();
 		BinaryForest treeMaker = new BinaryForest();

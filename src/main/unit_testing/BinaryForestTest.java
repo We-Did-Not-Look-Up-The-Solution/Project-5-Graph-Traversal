@@ -1,11 +1,17 @@
 package main.unit_testing;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import main.trees.BinaryTree;
+import main.trees.BinaryForest;
 
+/**
+ * Test the methods of the {@link BinaryForest} class
+ * 
+ * @author CarltheSpiny
+ *
+ */
 class BinaryForestTest {
 
 	/*

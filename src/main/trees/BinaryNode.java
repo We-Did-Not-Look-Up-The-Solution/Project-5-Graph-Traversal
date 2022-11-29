@@ -1,7 +1,7 @@
 package main.trees;
 
 /**
-A class that represents nodes in a binary tree.
+A class that represents nodes in a binary tree. (package only)
 
 @author Frank M. Carrano
 @author Timothy M. Henry
@@ -96,8 +96,7 @@ class BinaryNode<T> {
 	   return height;
 	} // end getHeight
 
-	public int getNumberOfNodes()
-	{
+	public int getNumberOfNodes() {
 	   int leftNumber = 0;
 	   int rightNumber = 0;
 
