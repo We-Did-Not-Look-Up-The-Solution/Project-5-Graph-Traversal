@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -40,7 +41,22 @@ class BinaryTreeTest {
 		emptyTest.clear();
 		assertEquals(true, emptyTest.isEmpty());
 		
-		BinaryTree<Character> iteratorTest = testForest.getDFTTree();
+		BinaryTree<Character> depthFirstTree = testForest.getDFTTree();
+		
+		Iterator<Character> inorderIterator = depthFirstTree.getInorderIterator();
+		ArrayList<Character> listForInorderTest = new ArrayList<Character>();
+		while (inorderIterator.hasNext())
+			listForInorderTest.add(inorderIterator.next());
+		
+		Iterator<Character> levelOrderIterator = depthFirstTree.getLevelOrderIterator();
+		ArrayList<Character> listForLevelOrderTest = new ArrayList<Character>();
+		while (levelOrderIterator.hasNext())
+			listForLevelOrderTest.add(levelOrderIterator.next());
+		
+		Iterator<Character> preOrderIterator = depthFirstTree.getPreorderIterator();
+		ArrayList<Character> listForPreorderTest = new ArrayList<Character>();
+		while (preOrderIterator.hasNext())
+			listForPreorderTest.add(preOrderIterator.next());
 		
 		// AssertLinesMatch
 		// AssertIterableEquals
@@ -48,6 +64,9 @@ class BinaryTreeTest {
 		Iterable<Character> levelorderTest = new ArrayList<>(Arrays.asList('a', 'b', 'c', 'e', 'f', 'h', 'g', 'i', 'd'));
 		Iterable<Character> preorderTest = new ArrayList<>(Arrays.asList('a', 'b', 'e', 'f', 'c', 'h', 'i', 'd', 'g'));
 		
+		assertIterableEquals(inorderTest, listForInorderTest);
+		assertIterableEquals(levelorderTest, listForLevelOrderTest);
+		assertIterableEquals(preorderTest, listForPreorderTest);
 	}
 
 }

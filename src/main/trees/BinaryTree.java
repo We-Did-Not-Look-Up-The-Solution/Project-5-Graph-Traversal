@@ -19,11 +19,11 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> {
    private BinaryNode<T> root;
 
    public BinaryTree() {
-      root = null;
+      this.root = null;
    }
 
    public BinaryTree(T rootData) {
-      root = new BinaryNode<>(rootData);
+      this.root = new BinaryNode<>(rootData);
    }
 
    public BinaryTree(T rootData, BinaryTree<T> leftTree, BinaryTree<T> rightTree) {
@@ -36,17 +36,17 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> {
 
 
    private void initializeTree(T rootData, BinaryTree<T> leftTree, BinaryTree<T> rightTree) {
-      root = new BinaryNode<>(rootData);
+      this.root = new BinaryNode<>(rootData);
 
       if ((leftTree != null) && !leftTree.isEmpty())
-         root.setLeftChild(leftTree.root);
+         this.root.setLeftChild(leftTree.root);
 
       if ((rightTree != null) && !rightTree.isEmpty())
       {
          if (rightTree != leftTree)
-            root.setRightChild(rightTree.root);
+            this.root.setRightChild(rightTree.root);
          else
-            root.setRightChild(rightTree.root.copy());
+            this.root.setRightChild(rightTree.root.copy());
       } // end if
 
       if ((leftTree != null) && (leftTree != this))
@@ -57,7 +57,7 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> {
    }
 
    public void setRootData(T rootData) {
-      root.setData(rootData);
+      this.root.setData(rootData);
    }
 
    @Override
@@ -65,36 +65,36 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> {
       if (isEmpty())
          throw new EmptyTreeException();
       else
-         return root.getData();
+         return this.root.getData();
    }
 
    public boolean isEmpty() {
-      return root == null;
+      return this.root == null;
    }
 
    public void clear() {
-      root = null;
+      this.root = null;
    }
 
    protected void setRootNode(BinaryNode<T> rootNode) {
-      root = rootNode;
+      this.root = rootNode;
    }
 
    protected BinaryNode<T> getRootNode() {
-      return root;
+      return this.root;
    }
    
    public int getHeight() {
       int height = 0;
-      if (root != null)
-         height = root.getHeight();
+      if (this.root != null)
+         height = this.root.getHeight();
       return height;
    }
 
    public int getNumberOfNodes() {
       int numberOfNodes = 0;
-      if (root != null)
-         numberOfNodes = root.getNumberOfNodes();
+      if (this.root != null)
+         numberOfNodes = this.root.getNumberOfNodes();
       return numberOfNodes;
    }
    
@@ -138,12 +138,12 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> {
       private BinaryNode<T> currentNode;
 
       public InorderIterator() {
-         nodeStack = new LinkedStack<>();
-         currentNode = root; // set first node as the root
+         this.nodeStack = new LinkedStack<>();
+         this.currentNode = BinaryTree.this.root; // set first node as the root
       }
 
       public boolean hasNext() {
-         return !nodeStack.isEmpty() || (currentNode != null);
+         return !this.nodeStack.isEmpty() || (this.currentNode != null);
       }
 
       /**
@@ -154,15 +154,15 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> {
          BinaryNode<T> nextNode = null;
 
          // Get Left (Keep going until the first left with no left child)
-         while (currentNode != null) {
-            nodeStack.push(currentNode); // Push the current node (root or left)
-            currentNode = currentNode.getLeftChild(); // set current node to new left
+         while (this.currentNode != null) {
+            this.nodeStack.push(this.currentNode); // Push the current node (root or left)
+            this.currentNode = this.currentNode.getLeftChild(); // set current node to new left
          } // end while
 
          // Once at last left with no child, this left becomes Root, now get right of this root
-         if (!nodeStack.isEmpty()) {
-            nextNode = nodeStack.pop(); // Pop the last left node and set as the nextNode (Will return this)
-            currentNode = nextNode.getRightChild(); // Get the right node of this root and set it as the current node
+         if (!this.nodeStack.isEmpty()) {
+            nextNode = this.nodeStack.pop(); // Pop the last left node and set as the nextNode (Will return this)
+            this.currentNode = nextNode.getRightChild(); // Get the right node of this root and set it as the current node
          }
          else
             throw new NoSuchElementException();
@@ -196,15 +196,15 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> {
 	      private BinaryNode<T> currentNode;
 
 	      public PreorderIterator() {
-	         nodeStack = new LinkedStack<>();
-	         currentNode = root;
-	         if (currentNode != null) {
-		        	nodeStack.push(currentNode); 
+	         this.nodeStack = new LinkedStack<>();
+	         this.currentNode = BinaryTree.this.root;
+	         if (this.currentNode != null) {
+		        	this.nodeStack.push(this.currentNode); 
 		         }
 	      }
 
 	      public boolean hasNext() {
-	         return !nodeStack.isEmpty() || (currentNode != null);
+	         return !this.nodeStack.isEmpty() || (this.currentNode != null);
 	      } // end hasNext
 
 	      /**
@@ -216,16 +216,16 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> {
 	         
 	         // Push node (first wil be Root)
 	         
-	         if (!nodeStack.isEmpty()) {
-	        	 nextNode = nodeStack.pop(); // pop node and set as currentNode (Would become new root
+	         if (!this.nodeStack.isEmpty()) {
+	        	 nextNode = this.nodeStack.pop(); // pop node and set as currentNode (Would become new root
 	        	 
 	        	 // get right
-	        	 currentNode = nextNode.getRightChild();
-	        	 if (currentNode != null)
-	        		 nodeStack.push(currentNode); // Get right of currentNode and push
-	        	 currentNode = nextNode.getLeftChild();
-	        	 if (currentNode != null)
-	        		 nodeStack.push(currentNode); // Get left of currentNode and push
+	        	 this.currentNode = nextNode.getRightChild();
+	        	 if (this.currentNode != null)
+	        		 this.nodeStack.push(this.currentNode); // Get right of currentNode and push
+	        	 this.currentNode = nextNode.getLeftChild();
+	        	 if (this.currentNode != null)
+	        		 this.nodeStack.push(this.currentNode); // Get left of currentNode and push
 	         } else {
 	        	 throw new NoSuchElementException();
 	         }
@@ -244,15 +244,15 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> {
 	      private BinaryNode<T> currentNode;
 
 	      public PostorderIterator() {
-	         nodeStack = new LinkedStack<>();
-	         currentNode = root;
-	         if (currentNode != null) {
-		        	nodeStack.push(currentNode); // push node (first is root)
+	         this.nodeStack = new LinkedStack<>();
+	         this.currentNode = BinaryTree.this.root;
+	         if (this.currentNode != null) {
+		        	this.nodeStack.push(this.currentNode); // push node (first is root)
 		         }
 	      }
 
 	      public boolean hasNext() {
-	         return !nodeStack.isEmpty() || (currentNode != null);
+	         return !this.nodeStack.isEmpty() || (this.currentNode != null);
 	      }
 
 	      /**
@@ -263,22 +263,22 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> {
 	         BinaryNode<T> nextNode = null;
 	         
 	         // keep going until we get to the leftmost node without children
-	         while (currentNode != null) {
-	            nodeStack.push(currentNode); // Push the current node (root or left)
-	            currentNode = currentNode.getLeftChild(); // set current node to new left
+	         while (this.currentNode != null) {
+	            this.nodeStack.push(this.currentNode); // Push the current node (root or left)
+	            this.currentNode = this.currentNode.getLeftChild(); // set current node to new left
 	         } // end while
 	         
-	         if (!nodeStack.isEmpty()) {
-	        	 nextNode = nodeStack.peek();
+	         if (!this.nodeStack.isEmpty()) {
+	        	 nextNode = this.nodeStack.peek();
 	        	 
 	        	 // if left most node does not have a child
 	        	 if (nextNode.getRightChild() == null) {
-	        		 nextNode = nodeStack.pop(); // Then pop the node on top and set as nextNode
-	        		 currentNode = nodeStack.peek(); // Get the top node
+	        		 nextNode = this.nodeStack.pop(); // Then pop the node on top and set as nextNode
+	        		 this.currentNode = this.nodeStack.peek(); // Get the top node
 	        	 }
 	        	 
 	        	 // get the right child of the currentNode
-	        	 currentNode = currentNode.getRightChild();
+	        	 this.currentNode = this.currentNode.getRightChild();
 	        	 
 	        	 
 	         } else {
@@ -299,16 +299,16 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> {
 	      private BinaryNode<T> currentNode;
 
 	      public LevelorderIterator() {
-	         nodeQueue = new LinkedQueue<>();
-	         currentNode = root;
+	         this.nodeQueue = new LinkedQueue<>();
+	         this.currentNode = BinaryTree.this.root;
 	         
 	         // Queue first node (first wil be Root)
-	         if (currentNode != null)
-	        	 nodeQueue.enqueue(currentNode);
+	         if (this.currentNode != null)
+	        	 this.nodeQueue.enqueue(this.currentNode);
 	      }
 
 	      public boolean hasNext() {
-	         return !nodeQueue.isEmpty() || (currentNode != null);
+	         return !this.nodeQueue.isEmpty() || (this.currentNode != null);
 	      } // end hasNext
 
 	      /**
@@ -319,18 +319,18 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> {
 	         BinaryNode<T> nextNode = null;
 	         
 	         // Dequeue top node / dequeue first node
-	         if (!nodeQueue.isEmpty()) {
-	        	 nextNode = nodeQueue.dequeue();
+	         if (!this.nodeQueue.isEmpty()) {
+	        	 nextNode = this.nodeQueue.dequeue();
 	        	 
 	        	// queue left node of current node
-	        	 currentNode = nextNode.getLeftChild();
-	        	 if (currentNode != null)
-	        		 nodeQueue.enqueue(currentNode);
+	        	 this.currentNode = nextNode.getLeftChild();
+	        	 if (this.currentNode != null)
+	        		 this.nodeQueue.enqueue(this.currentNode);
 	        	 
 	        	// queue right node of current node
-	        	 currentNode = nextNode.getRightChild();
-	        	 if (currentNode != null)
-	        		 nodeQueue.enqueue(currentNode);
+	        	 this.currentNode = nextNode.getRightChild();
+	        	 if (this.currentNode != null)
+	        		 this.nodeQueue.enqueue(this.currentNode);
 	        	 
 	         } else {
 	        	 throw new NoSuchElementException();

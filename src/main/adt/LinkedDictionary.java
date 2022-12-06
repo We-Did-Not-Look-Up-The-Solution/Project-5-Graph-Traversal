@@ -89,12 +89,14 @@ public class LinkedDictionary<K extends Comparable<? super K>, V> implements Dic
 		   currentNode = currentNode.getNextNode();
 	   }
 	
-	   if (currentNode.getNextNode() != null)
+	   if (currentNode.getNextNode() != null && previousNode != null) {
 		   // the node after the one we want to remove is the next node of the previous node
-		   previousNode.setNextNode(currentNode.getNextNode()); 	   
+		   previousNode.setNextNode(currentNode.getNextNode());
+	   }
 	   
 	   V result = currentNode.getValue();
 	   currentNode = null;
+	   this.numberOfEntries--;
 	   return result;
 	}
 
@@ -129,7 +131,8 @@ public class LinkedDictionary<K extends Comparable<? super K>, V> implements Dic
 
 	@Override
 	public void clear() {
-		for(int i = 0; i < numberOfEntries; i++)
+		int copyOf = numberOfEntries;
+		for(int i = 0; i < copyOf; i++)
 			remove(firstNode.key);
 	}
    
