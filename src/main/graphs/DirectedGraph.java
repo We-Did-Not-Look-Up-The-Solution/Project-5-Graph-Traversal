@@ -102,8 +102,27 @@ public class DirectedGraph<T extends Comparable<T>> implements GraphInterface<T>
 	}
 
 	public boolean hasEdge(T begin, T end) {
-		return false;
+		boolean result = false;
+		VertexInterface<T> beginVertex = this.vertices.getValue(begin);
+		Iterator<VertexInterface<T>> iterator = beginVertex.getNeighborIterator();
+		while (iterator.hasNext() && !result) {
+			result = iterator.next().getLabel() == end ? true : false;
+		}
+		return result;
 	}
+	
+	/*
+	 * public boolean addEdge(T begin, T end, double edgeWeight) {
+	   boolean result = false;
+	   VertexInterface<T> beginVertex = vertices.getValue(begin);
+	   VertexInterface<T> endVertex = vertices.getValue(end);
+	   if ( (beginVertex != null) && (endVertex != null) )
+	      result = beginVertex.connect(endVertex, edgeWeight);
+	   if (result)
+	      edgeCount++;
+	   return result;
+	} // end addEdge
+	 */
 
 	public QueueInterface<T> getDepthFirstTraversal(T origin) {
 		resetVertices();

@@ -1,10 +1,12 @@
 package main.unit_testing;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class DirectedGraphTest {
+import main.graphs.DirectedGraph;
+
+public class DirectedGraphTest {
 	
 	/*
 	 * Test These methods:
@@ -20,60 +22,59 @@ class DirectedGraphTest {
 	 */
 
 	DirectedGraph<Character> testGraph = new DirectedGraph<>();
-
-    public static void createGraph(DirectedGraph<Character> graph)
-    {
-		directedCharGraph.addVertex('a');
-		directedCharGraph.addVertex('b');
-		directedCharGraph.addVertex('c');
-		directedCharGraph.addVertex('d');
-		directedCharGraph.addVertex('e');
-		directedCharGraph.addVertex('f');
-		directedCharGraph.addVertex('g');
-		directedCharGraph.addVertex('h');
-		directedCharGraph.addVertex('i');
+	
+	/**
+	 * Make a graph for testing
+	 * @param graph the empty graph to fill out
+	 */
+    public static void createGraph(DirectedGraph<Character> graph) {
+		graph.addVertex('a');
+		graph.addVertex('b');
+		graph.addVertex('c');
+		graph.addVertex('d');
+		graph.addVertex('e');
+		graph.addVertex('f');
+		graph.addVertex('g');
+		graph.addVertex('h');
+		graph.addVertex('i');
 		
 		// connect the edges
-		directedCharGraph.addEdge('a', 'b');
-		directedCharGraph.addEdge('a', 'd');
-		directedCharGraph.addEdge('a', 'e');
-		directedCharGraph.addEdge('b', 'e');
-		directedCharGraph.addEdge('d', 'g');
-		directedCharGraph.addEdge('e', 'f');
-		directedCharGraph.addEdge('e', 'h');
-		directedCharGraph.addEdge('g', 'h');
-		directedCharGraph.addEdge('f', 'c');
-		directedCharGraph.addEdge('f', 'h');
-		directedCharGraph.addEdge('h', 'i');
-		directedCharGraph.addEdge('c', 'b');
-		directedCharGraph.addEdge('i', 'f');
+		graph.addEdge('a', 'b');
+		graph.addEdge('a', 'd');
+		graph.addEdge('a', 'e');
+		graph.addEdge('b', 'e');
+		graph.addEdge('d', 'g');
+		graph.addEdge('e', 'f');
+		graph.addEdge('e', 'h');
+		graph.addEdge('g', 'h');
+		graph.addEdge('f', 'c');
+		graph.addEdge('f', 'h');
+		graph.addEdge('h', 'i');
+		graph.addEdge('c', 'b');
+		graph.addEdge('i', 'f');
 	}
+    
 	@Test
-    public void testgetNumberOfNodes()
-    {
-        createGraph(testGraph);
-        assertEquals(13, testGraph.getNumberOfEdges());
+    public void testgetNumberOfNodes() {
+        createGraph(this.testGraph);
+        assertEquals(13, this.testGraph.getNumberOfEdges());
     }
+	
     @Test
-    public void testIsEmpty()
-    {
-        assertEquals(true, testGraph.isEmpty());
-        createGraph(testGraph);
-        assertEquals(false, testGraph.isEmpty());
+    public void testIsEmpty() {
+        assertEquals(true, this.testGraph.isEmpty());
+        createGraph(this.testGraph);
+        assertEquals(false, this.testGraph.isEmpty());
     }
 
 
     @Test
-    public void testHasEdge()
-    {
-        createGraph(testGraph);
-        assertEquals(true, testGraph.hasEdge("A","B"));
-        assertEquals(true, testGraph.hasEdge("B","E"));
-        assertEquals(true, testGraph.hasEdge("G","H"));
-        assertEquals(true, testGraph.hasEdge("F","C"));
-        assertEquals(true, testGraph.hasEdge("I","F"));
+    public void testHasEdge() {
+        createGraph(this.testGraph);
+        assertEquals(true, this.testGraph.hasEdge('a', 'b'));
+        assertEquals(true, this.testGraph.hasEdge('b','e'));
+        assertEquals(true, this.testGraph.hasEdge('g','h'));
+        assertEquals(true, this.testGraph.hasEdge('f','c'));
+        assertEquals(true, this.testGraph.hasEdge('i','f'));
     }
-}
-
-
 }
